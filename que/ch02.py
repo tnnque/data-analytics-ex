@@ -195,4 +195,16 @@ letter_prop['F'].plot(kind='bar', rot=0, ax=axes[1], title='Female')
 
 letter_prop = table/table.sum().astype(float)
 dny_ts = letter_prop.ix[['d', 'n', 'y'], 'M'].T
-print(dny_ts.head())
+# print(dny_ts.head())
+
+all_names = top1000.name.unique()
+mask = np.array(['lesl' in x.lower() for x in all_names])
+lesley_like = all_names[mask]
+print(lesley_like)
+filtered = top1000[top1000.name.isin(lesley_like)]
+# print(filtered.groupby('name').births.sum())
+table = filtered.pivot_table('births', 'year', columns='sex', aggfunc='sum')
+table = table.div(table.sum(1), axis=0)
+print(table.tail())
+# print(table.plot(style={'M': 'k-', 'F': 'k--'}))
+# plt.show()
