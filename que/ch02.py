@@ -205,6 +205,6 @@ filtered = top1000[top1000.name.isin(lesley_like)]
 # print(filtered.groupby('name').births.sum())
 table = filtered.pivot_table('births', 'year', columns='sex', aggfunc='sum')
 table = table.div(table.sum(1), axis=0)
-print(table.tail())
+# print(table.tail())
 # print(table.plot(style={'M': 'k-', 'F': 'k--'}))
 # plt.show()
