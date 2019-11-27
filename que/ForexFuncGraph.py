@@ -7,4 +7,5 @@ def load(paths):
     for path in paths:
         df.append(path)
     return df
-load('/Users/tnnque/PycharmProjects/data-analytics-ex/que/train_small_cleaned.csv' '/Users/tnnque/PycharmProjects/data-analytics-ex/que/train_small_cleaned.csv')
+load('/Users/tnnque/PycharmProjects/data-analytics-ex/que/train_small_cleaned.csv'
+     '/Users/tnnque/PycharmProjects/data-analytics-ex/que/train_small_cleaned.csv')
