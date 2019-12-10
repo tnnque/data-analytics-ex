@@ -7,7 +7,7 @@ from pandas import DataFrame
 path = input("Enter path:")
 col_name = input("Enter varible:")
 
-def extract(path):
+def extract(path, col_name):
     df = pd.read_csv(path)
     current_row = None
     old_row = None
@@ -28,18 +28,27 @@ def extract(path):
                 old_row = row
             else:
                 y.append(sum_row/n)
+                X.append(len(X) + 1)
                 sum_row = row[col_name]
                 n = 1
                 old_row = row
 
-    return X, y
+    return X/np.max(X), y/np.max(y)
 
 def hypothesis(theta0, theta1, x):
     return theta0 + (theta1 * x)
 
 def plotline(theta0, theta1, X, y):
-    max_x = np.max(X) + 1000
-    min_x = np.min(X) - 1000
+    max_x = np.max(X)
+    min_x = np.min(X)
+
+    xplot = np.linspace(max_x, min_x, 2)
+    yplot = theta0 + (theta1 * xplot)
+
+    plt.plot(xplot, yplot, color = '#ff0000', label= 'Regression Line')
+    plt.scatter(X, y, label= col_name + " Price")
+    plt.legend()
+    plt.show()
 
 def derivatives(theta0, theta1, X, y):
     dtheta0 = 0
@@ -60,15 +69,16 @@ def updateParameters(theta0, theta1, X, y, alpha):
 
     return theta0, theta1
 
-def LinearRegression(path):
-    X, y = extract(path)
+def LinearRegression(path, col_name):
+    X, y = extract(path, col_name)
 
-    theta0 = np.random.rand()
+    theta0 = -np.random.rand()
     theta1 = np.random.rand()
 
     for i in range(0, 10000):
-        if i % 1000 == 0:
-            plotline(theta0, theta1, X, y)
-        theta0, theta1 = updateParameters(theta0, theta1, X, y, 0.005)
+        # if i % 1000 == 0:
+        #     plotline(theta0, theta1, X, y)
+        theta0, theta1 = updateParameters(theta0, theta1, X, y, 0.01)
+    plotline(theta0, theta1, X, y)
 
-LinearRegression(X, y)
+LinearRegression(path, col_name)
