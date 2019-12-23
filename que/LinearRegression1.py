@@ -5,7 +5,7 @@ from pandas import DataFrame
 
 #Data
 path = input("Enter path:")
-col_name = input("Enter varible:")
+col_name = input("Enter variable:")
 
 def extract(path, col_name):
     df = pd.read_csv(path)
