@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from pandas import DataFrame
+from pandas import DataFrame, Series
 
 path = '/Users/tnnque/PycharmProjects/data-analytics-ex/que/train_small_cleaned.csv'
 # input("Enter path:")
@@ -64,10 +64,15 @@ def extract(path, col_names):
                 start = end
                 end = end + 1
 
-    Y = new_df.iloc[:, :1]
-    X = pd.DataFrame(np.ones(len(new_df)))
-    # X = X.append(new_df.iloc[:, 1:])
-    print(X)
+    # temp_array = np.asarray(new_df)
+    temp_array = new_df.to_numpy(copy=True)
+    temp_array = np.insert(temp_array, 0, np.ones((167, )), axis=1)
+    pass
+    # Y = new_df.iloc[:, :1]
+    # temp_ones = pd.DataFrame(1, index=range(0, len(new_df)))
+    # temp_X = pd.DataFrame(new_df.iloc[:, 1:], index=range(0, len(new_df)))
+    # X = temp_ones + temp_X
+    # print(X)
     # return X, Y
 
 # def hypothesis(X, B):
