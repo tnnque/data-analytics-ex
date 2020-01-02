@@ -64,18 +64,15 @@ def extract(path, col_names):
                 start = end
                 end = end + 1
 
-    # temp_array = np.asarray(new_df)
-    temp_array = new_df.to_numpy(copy=True)
-    temp_array = np.insert(temp_array, 0, np.ones((167, )), axis=1)
-    pass
-    # Y = new_df.iloc[:, :1]
-    # temp_ones = pd.DataFrame(1, index=range(0, len(new_df)))
-    # temp_X = pd.DataFrame(new_df.iloc[:, 1:], index=range(0, len(new_df)))
-    # X = temp_ones + temp_X
-    # print(X)
-    # return X, Y
+    X = new_df.iloc[:, 1:]
+    Y = new_df.iloc[:, :1]
 
-# def hypothesis(X, B):
-#     return X.dot(B)
+    temp_array = X.to_numpy(copy=True)
+    X = np.insert(temp_array, 0, np.ones(len(X), ), axis= 1)
+    Y = Y.to_numpy(copy=True)
+    return X, Y
+
+def hypothesis(X, B):
+    return X.dot(B)
 
 extract(path, col_names)
